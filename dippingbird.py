@@ -12,7 +12,6 @@ import atexit
 import subprocess
 
 APP_TITLE = "Administrator: Command Prompt - python  -m aider"
-GIF_PATH = 'dippingbird.gif'
 RUN_EVERY = 3  # seconds
 
 REEVALUATION_MESSAGE = "Let's take a step back and re-evaluate if what we're doing makes sense. We might be getting in a loop here. Let's do something a little more out of left field instead."
@@ -20,6 +19,7 @@ REEVALUATION_CHANCE = 0.1
 
 FORCE_EXIT_DELAY = 5  # seconds
 
+GIF_PATH = 'dippingbird.gif'
 DISABLE_GIF = False  # Set to True to disable the GIF display
 WINDOW_SIZE = (300, 300)
 FRAME_RATE = 60
