@@ -1,0 +1,327 @@
+
+# 2024-10-23 13:47:47.082489
++
++/add ADVICE.txt
++  GOALS.txt
++  INSTRUCTIONS.txt
++  README.md
++  main.py
++  requirements.txt
++  STATUS.txt
++  MODE.txt
+
+# 2024-10-23 13:49:26.647194
++y
+
+# 2024-10-23 13:50:51.657396
++/help
+
+# 2024-10-23 13:50:59.385685
++/ls
+
+# 2024-10-23 13:51:18.385058
++/add INSTRUCTIONS.txt
++  MODE.txt
++  GOALS.txt
++  README.md
++  requirements.txt
++  main.py
++  STATUS.txt
++  ADVICE.txt
+
+# 2024-10-23 13:51:23.041033
++y
+
+# 2024-10-23 13:55:54.080411
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more out of left field instead.
++y
++y
++y
++y
+
+# 2024-10-23 13:55:54.476146
++y
+
+# 2024-10-23 13:55:54.480053
++/run type README.md
+
+# 2024-10-23 13:55:54.635576
++/run python main.py
+
+# 2024-10-23 13:56:07.233855
++/run python main.py
+
+# 2024-10-23 13:56:47.020818
++y
++y
++y
++
+
+# 2024-10-23 13:57:12.679710
++y
+
+# 2024-10-23 13:57:12.684593
++/run python main.py [folder_path]
+
+# 2024-10-23 13:57:22.532570
++/run pip install -r requirements.txt
+
+# 2024-10-23 14:03:50.687034
++/add INSTRUCTIONS.txt
++  MODE.txt
++  GOALS.txt
++  README.md
++  requirements.txt
++  main.py
++  STATUS.txt
++  ADVICE.txt
+
+# 2024-10-23 14:05:03.015295
++y
+
+# 2024-10-23 14:05:32.997246
++y
++y
++y
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more out of left field instead.
+
+# 2024-10-23 14:05:35.415069
++y
+
+# 2024-10-23 14:05:35.419952
++/run python main.py
+
+# 2024-10-23 14:05:58.314413
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more out of left field instead.
+
+# 2024-10-23 14:06:00.732255
++y
+
+# 2024-10-23 14:06:00.736162
++/run pip install -r requirements.txt
+
+# 2024-10-23 14:06:13.598719
++y
++y
+
+# 2024-10-23 14:06:20.054793
++y
+
+# 2024-10-23 14:06:26.469724
++/run python main.py
+
+# 2024-10-23 14:06:49.376200
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more out of left field instead.
+
+# 2024-10-23 14:07:14.793064
++y
++y
++y
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more out of left field instead.
+
+# 2024-10-23 14:07:17.210818
++y
+
+# 2024-10-23 14:07:17.214724
++/run python main.py
+
+# 2024-10-23 14:07:48.894366
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more out of left field instead.
++y
++
+
+# 2024-10-23 14:07:55.324135
++/run python main.py
+
+# 2024-10-23 14:08:01.859874
++y
+
+# 2024-10-23 14:08:27.593396
++y
++y
++y
+
+# 2024-10-23 14:08:34.016457
++y
+
+# 2024-10-23 14:08:34.020363
++/run python main.py C:\path\to\images
+
+# 2024-10-23 14:08:51.638068
++let's take a step back and re-evaluate if what we're doing makes sense.  we might be getting in a loop here.  let's do something a little more 
+
+# 2024-10-23 14:08:59.093736
++y
+
+# 2024-10-23 14:09:00.034927
++/run python main.py .
+
+# 2024-10-23 14:14:38.111214
++y
++y
+
+# 2024-10-23 14:14:42.506739
++y
+
+# 2024-10-23 14:14:42.510645
++/run mkdir example_images
+
+# 2024-10-23 14:14:42.632418
++/run cd example_images
+
+# 2024-10-23 14:14:42.763311
++/run curl -O https://raw.githubusercontent.com/mdn/learning-area/master/javascript/building-blocks/image-gallery/images/pic1.jpg
+
+# 2024-10-23 14:14:43.205704
++/run curl -O https://raw.githubusercontent.com/mdn/learning-area/master/javascript/building-blocks/image-gallery/images/pic2.jpg
+
+# 2024-10-23 14:14:43.606738
++/run curl -O https://raw.githubusercontent.com/mdn/learning-area/master/javascript/building-blocks/image-gallery/images/pic3.jpg
+
+# 2024-10-23 14:14:51.453132
++/run python main.py example_images
+
+# 2024-10-23 14:15:33.785806
++y
++y
++y
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
++y
++y
++y
++y
+
+# 2024-10-23 14:16:00.513429
++y
++y
++y
++y
++y
++y
+
+# 2024-10-23 14:16:05.083030
++y
+
+# 2024-10-23 14:16:17.611780
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
+
+# 2024-10-23 14:16:20.001347
++y
+
+# 2024-10-23 14:16:20.005254
++/run python main.py example_images
+
+# 2024-10-23 14:16:28.156769
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
+
+# 2024-10-23 14:16:30.659108
++y
+
+# 2024-10-23 14:16:38.647856
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
+
+# 2024-10-23 14:17:06.534203
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
++y
++y
+
+# 2024-10-23 14:17:10.945962
++y
+
+# 2024-10-23 14:17:10.949868
++/run mkdir example_images
+
+# 2024-10-23 14:17:11.067049
++/run cd example_images
+
+# 2024-10-23 14:17:11.197901
++/run curl -O https://raw.githubusercontent.com/mdn/learning-area/master/javascript/building-blocks/image-gallery/images/pic1.jpg
+
+# 2024-10-23 14:17:11.617369
++/run curl -O https://raw.githubusercontent.com/mdn/learning-area/master/javascript/building-blocks/image-gallery/images/pic2.jpg
+
+# 2024-10-23 14:17:12.106127
++/run curl -O https://raw.githubusercontent.com/mdn/learning-area/master/javascript/building-blocks/image-gallery/images/pic3.jpg
+
+# 2024-10-23 14:17:12.531175
++/run cd ..
+
+# 2024-10-23 14:17:12.637659
++/run python main.py example_images
+
+# 2024-10-23 14:17:25.090410
++y
++y
++y
+
+# 2024-10-23 14:17:29.535039
++y
+
+# 2024-10-23 14:18:02.247943
++/run python main.py example_images
+
+# 2024-10-23 14:20:52.859423
++/help
+
+# 2024-10-23 14:21:00.004152
++/read-only INSTRUCTIONS.txt
+
+# 2024-10-23 14:22:06.139162
++q
+
+# 2024-10-23 14:30:12.726947
++y
+
+# 2024-10-23 14:31:18.841857
++/add INSTRUCTIONS.txt
++  MODE.txt
++  GOALS.txt
++  README.md
++  requirements.txt
++  main.py
++  STATUS.txt
++  ADVICE.txt
+
+# 2024-10-23 14:31:31.716637
++y
+
+# 2024-10-23 14:31:54.531157
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
+
+# 2024-10-23 14:31:56.888765
++y
+
+# 2024-10-23 14:31:56.892671
++/run python main.py example_images
+
+# 2024-10-23 14:32:30.053181
++y
++y
++y
++y
++y
++let's take a step back and re-evaluate if what we're doing makes sense. we might be getting in a loop here. let's do something a little more out of left field instead.
++y
+
+# 2024-10-23 14:32:34.177180
++y
+
+# 2024-10-23 14:33:06.480550
++y
++y
++y
++
+
+# 2024-10-23 14:33:08.553241
++y
+
+# 2024-10-23 14:33:08.557148
++/run python main.py example_images

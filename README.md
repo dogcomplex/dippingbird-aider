@@ -11,24 +11,39 @@ Fully-automated* coding for Aider (currently couched with asterisks)
 - USE AT YOUR OWN RISK
 
 ```
-# install aider: https://aider.chat/
-
 # create your project repo
+# init a venv or miniconda env
+python -m venv venv
+.\venv\Scripts\activate
+
+# IDEALLY RUN THIS IN A SECURE VIRTUAL MACHINE AND NOT ON YOUR HOST LIKE A CRAZY PERSON
+
+# install aider: https://aider.chat/
+python -m pip install -U aider-chat
+# set your env keys for anthropic and openai
+
 # manually git init, Aider wont do it right afaik
 git init
+
 # copy /template folder into it and adjust/clean up GOALS.txt, ADVICE.txt, MODE.txt, STATUS.txt as needed (INSTRUCTIONS.txt can stay as is).  ADVICE.txt is your ongoing human feedback notes on the project
+
+# ===== COPY/PASTE FROM HERE ON RERUNS:
+.\venv\Scripts\activate
 
 python -m aider --max-chat-history-tokens 100000 --no-gitignore --attribute-commit-message-author --sonnet
 
 # add your files
-/add ADVICE.txt
-  GOALS.txt
-  INSTRUCTIONS.txt
-  README.md
-  main.py
-  requirements.txt
-  STATUS.txt
+/add INSTRUCTIONS.txt
   MODE.txt
+  GOALS.txt
+  README.md
+  requirements.txt
+  main.py
+  STATUS.txt
+  ADVICE.txt
+
+# set INSTRUCTIONS.txt as read-only in aider if feeling paranoid
+/read-only INSTRUCTIONS.txt
 ```
 
 Then in a separate terminal, run:
@@ -36,6 +51,7 @@ Then in a separate terminal, run:
 ```
 python dippingbird.py
 ```
+Though you'll likely have to adjust APP_TITLE to match your current aider session title.
 
 
 # TODO

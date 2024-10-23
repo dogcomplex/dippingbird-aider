@@ -14,3 +14,5 @@ Too many "Error loading image" events.  not sure if they're from all images bein
 OVERALL:
 big issue is that moving an image is TOO SLOW - we need to immedadiately jump to the next image.  make the move happen in the background, and flag the image as moved or something, instead of relying on the index so heavily.
 [status: all resolved!!!]
+
+Have it use the images at ./example_images for testing, they already exist

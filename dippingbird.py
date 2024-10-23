@@ -2,16 +2,28 @@ import time
 import os
 import threading
 import pygame
-from pywinauto import Application
+from pywinauto import Application, Desktop
 from PIL import Image, ImageSequence
 import signal
 import sys
 import re
 import random
+import atexit
+import subprocess
 
 APP_TITLE = "Administrator: Command Prompt - python  -m aider"
 GIF_PATH = 'dippingbird.gif'
-RUN_EVERY = 5  # seconds
+RUN_EVERY = 3  # seconds
+
+REEVALUATION_MESSAGE = "Let's take a step back and re-evaluate if what we're doing makes sense. We might be getting in a loop here. Let's do something a little more out of left field instead."
+REEVALUATION_CHANCE = 0.1
+
+FORCE_EXIT_DELAY = 5  # seconds
+
+DISABLE_GIF = False  # Set to True to disable the GIF display
+WINDOW_SIZE = (300, 300)
+FRAME_RATE = 60
+
 
 # Event to manage thread termination
 stop_event = threading.Event()
@@ -28,27 +40,32 @@ def list_open_windows():
 # Connect to the command prompt window
 def inspect_controls():
     try:
-        windows = list_open_windows()
+        print("Listing relevant windows:")
+        windows = Desktop(backend="win32").windows()
+        search_terms = ["command", "prompt", "aider"]
         
-        app = Application().connect(title_re=f"^{re.escape(APP_TITLE)}.*")
-        window = app.window(title_re=f"^{re.escape(APP_TITLE)}.*")
+        filtered_windows = [
+            w for w in windows
+            if any(term.lower() in w.window_text().lower() for term in search_terms)
+        ]
         
-        # Print all the control identifiers to understand the structure
-        window.print_control_identifiers()
-    except Exception as e:
-        print(f"Error connecting to window: {e}")
+        for w in filtered_windows:
+            print(f"Window Title: '{w.window_text()}'")
 
+    except Exception as e:
+        print(f"Error listing windows: {e}")
+
+def force_exit(signum, frame):
+    print("\nForce exiting the script...")
+    os._exit(1)
 
 def handle_sigint(signum, frame):
-    global should_exit
     print("\nCTRL+C detected! Stopping the script...")
-    should_exit = True
-    stop_event.set()
-    pygame.quit()  # Ensure pygame closes
+    cleanup()
+    # Set a timer for force exit after FORCE_EXIT_DELAY seconds
+    signal.signal(signal.SIGALRM, force_exit)
+    signal.alarm(FORCE_EXIT_DELAY)
     sys.exit(0)
-
-import subprocess
-
 
 # Check if the cmd output matches either the "> " or "[Yes]:"
 def check_cmd_output():
@@ -81,110 +98,122 @@ def send_keys_if_match():
     global should_exit
     start_time = time.time()
     interval = RUN_EVERY
-    last_check = -interval # skip to the first check
-    while not should_exit:
+    last_check = -interval
+    while not should_exit and not stop_event.is_set():
         try:
-            rounded_time = round(time.time() - start_time)
             # Check the command output every second
+            if stop_event.wait(1):  # Wait for 1 second or until stop_event is set
+                break
+            rounded_time = round(time.time() - start_time)
             if rounded_time > last_check + interval:
-                # if check_cmd_output():
                 app = Application().connect(title_re=f"^{re.escape(APP_TITLE)}.*")
                 window = app.window(title_re=f"^{re.escape(APP_TITLE)}.*")
                 # occasionally send a prompt to get out of loops:
-                # random 1/10 chance:
-                if random.random() < 0.1:
-                    message = "Let's take a step back and re-evaluate if what we're doing makes sense.  We might be getting in a loop here.  Let's do something a little more out of left field instead."
-                    window.send_keystrokes(message + "{ENTER}")
+                if random.random() < REEVALUATION_CHANCE:
+                    window.send_keystrokes(REEVALUATION_MESSAGE + "{ENTER}")
                 else:
                     window.send_keystrokes("y{ENTER}")
                 print(f"{rounded_time}  y...")
-                # else:
-                #    print(f"{rounded_time}  zzzz.....")
                 last_check = rounded_time
             time.sleep(1)
         except Exception as e:
             print(f"Error sending keys: {e}")
             time.sleep(60)
-            #break
 
-def play_dipping_bird_gif():
-    global should_exit
-    pygame.init()
+class DippingBirdGIF:
+    def __init__(self):
+        self.screen = None
+        self.frames = []
+        self.durations = []
+        self.current_frame = 0
+        self.frame_time = 0
+        self.clock = pygame.time.Clock()
 
-    # Set up the display
-    screen = pygame.display.set_mode((300, 300))  # Adjust size as needed
-    pygame.display.set_caption("Dipping Bird")
+    def setup(self):
+        self.screen = pygame.display.set_mode(WINDOW_SIZE)
+        pygame.display.set_caption("Dipping Bird")
 
-    if not os.path.exists(GIF_PATH):
-        print(f"Error: '{GIF_PATH}' not found.")
-        stop_event.set()
-        return
+        if not os.path.exists(GIF_PATH):
+            print(f"Error: '{GIF_PATH}' not found.")
+            return False
 
-    # Open the GIF
-    gif = Image.open(GIF_PATH)
+        gif = Image.open(GIF_PATH)
+        self.durations = [frame.info['duration'] for frame in ImageSequence.Iterator(gif)]
+        self.frames = [pygame.image.fromstring(frame.convert("RGBA").tobytes(), frame.size, "RGBA") for frame in ImageSequence.Iterator(gif)]
+        return True
 
-    # Get the duration of each frame
-    durations = [frame.info['duration'] for frame in ImageSequence.Iterator(gif)]
-    frames = [pygame.image.fromstring(frame.convert("RGBA").tobytes(), frame.size, "RGBA") for frame in ImageSequence.Iterator(gif)]
-
-    clock = pygame.time.Clock()
-    current_frame = 0
-    frame_time = 0
-    running = True
-
-    while running and not should_exit:
+    def update(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                should_exit = True
-                stop_event.set()
+                return False
 
-        # Clear the screen
-        screen.fill((255, 255, 255))  # White background
+        self.screen.fill((255, 255, 255))
 
-        # Get the current frame and its duration
-        frame = frames[current_frame]
-        duration = durations[current_frame]
+        frame = self.frames[self.current_frame]
+        duration = self.durations[self.current_frame]
 
-        # Center the frame
-        frame_rect = frame.get_rect(center=(150, 150))
-        screen.blit(frame, frame_rect)
+        frame_rect = frame.get_rect(center=(WINDOW_SIZE[0]//2, WINDOW_SIZE[1]//2))
+        self.screen.blit(frame, frame_rect)
 
         pygame.display.flip()
 
-        # Move to the next frame after the duration has passed
-        frame_time += clock.tick(60)
-        if frame_time > duration:
-            current_frame = (current_frame + 1) % len(frames)  # Loop the GIF
-            frame_time = 0
+        self.frame_time += self.clock.tick(FRAME_RATE)
+        if self.frame_time > duration:
+            self.current_frame = (self.current_frame + 1) % len(self.frames)
+            self.frame_time = 0
 
+        return True
+
+def cleanup():
+    global should_exit
+    should_exit = True
+    stop_event.set()
     pygame.quit()
+    print("Cleanup complete.")
 
-# Create and manage threads for both tasks
 def main():
     global should_exit
     
-    # Register the SIGINT handler for CTRL+C
+    # Set up signal handlers
     signal.signal(signal.SIGINT, handle_sigint)
+    signal.signal(signal.SIGTERM, handle_sigint)
+    atexit.register(cleanup)
 
-    gif_thread = threading.Thread(target=play_dipping_bird_gif, daemon=True)
+    # Initialize pygame in the main thread
+    if not DISABLE_GIF:
+        pygame.init()
+
     key_thread = threading.Thread(target=send_keys_if_match, daemon=True)
-    
-    gif_thread.start()
     key_thread.start()
 
-    # Keep checking for the stop_event and join the threads when it is set
-    try:
-        while not should_exit:
-            time.sleep(0.1)  # Check every 100ms for responsiveness
+    if not DISABLE_GIF:
+        dipping_bird = DippingBirdGIF()
+        if not dipping_bird.setup():
+            cleanup()
+            return
 
-        gif_thread.join()
-        key_thread.join()
-        print("Both threads terminated.")
+    try:
+        while not should_exit and not stop_event.is_set():
+            if not DISABLE_GIF:
+                if not dipping_bird.update():
+                    break
+                if stop_event.wait(1/60):  # Wait for 1/60 second or until stop_event is set
+                    break
+            else:
+                if stop_event.wait(1):  # Wait for 1 second or until stop_event is set when GIF is disabled
+                    break
     except KeyboardInterrupt:
         print("\nKeyboardInterrupt detected, exiting...")
-        stop_event.set()
-        pygame.quit()
-        sys.exit(0)
+    finally:
+        cleanup()
+        key_thread.join(timeout=2)
+        print("Key thread terminated.")
+        # Force exit after cleanup
+        os._exit(0)
 
 if __name__ == "__main__":
-    main()
+    # if called with --help, run inspect_controls
+    if len(sys.argv) > 1 and sys.argv[1] == "--help":
+        inspect_controls()
+    else:
+        main()
