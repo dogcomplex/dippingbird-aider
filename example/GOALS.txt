@@ -1,0 +1,25 @@
+[DONE] Create an image viewing program which opens up a target image folder, opens the first image in fullscreen format (filling the viewer window, respecting aspect ratio), then listens to the following input actions:
+
+[DONE] - arrow key left: prev image in folder (looping back to first)
+[DONE] - arrow key right: next image in folder
+[DONE] - number key: copy the image to a subfolder (creating it if it doesnt exist yet) within the current folder named ./<number_key>/  so e.g. ./3
+[DONE] - delete: deletes the image and moves to the next
+[DONE] - Implement error handling and improve user feedback
+
+Next steps:
+1. [DONE] Create unit tests for the image viewer functions
+   [DONE] - Test load_images function
+   [DONE] - Test move_or_copy_image function
+   [DONE] - Test display_image function
+   [DONE] - Test update_display function
+   [DONE] - Test main function
+2. [IN PROGRESS] Optimize performance for large image collections
+   [DONE] - Implement lazy loading mechanism
+   [DONE] - Add image caching
+   [DONE] - Implement background preloading of images
+   [DONE] - Refactor code for better modularity and maintainability
+   TODO - Profile and further optimize if needed
+3. Add additional features (e.g., zoom, rotate, slideshow mode)
+4. Improve code documentation and add usage instructions to README.md
+5. Implement comprehensive error handling and logging
+6. Add configuration options (e.g., customizable keybindings, display settings)

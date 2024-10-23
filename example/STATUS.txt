@@ -1,0 +1,37 @@
+Image Viewer Program - Performance Improvements, Bug Fixes, and Testing
+
+- Created main.py with basic image viewing functionality
+- Added required dependencies to requirements.txt
+- Implemented features:
+  - Full-screen image display
+  - Navigation with left and right arrow keys
+  - Moving/Copying images to numbered subfolders
+  - Deleting images
+  - Error handling for file operations and image loading
+  - Improved user feedback with on-screen messages
+  - Added help message (press 'H' to display)
+  - Use current working directory as default folder when no argument is provided
+  - Near-instant image switch when pressing number keys 1-9
+  - MOVE/COPY toggle controlled by the CAPS LOCK key
+  - Background processing for image move/copy operations
+- Bug fixes:
+  - Fixed issue with double-skipping images after moving
+  - Improved image transition speed when moving/copying
+  - Enhanced handling of "Error loading image" events by removing unloadable images from the list
+  - Ensured correct looping back to the first image
+  - Improved resilience against folders with multiple corrupted or unloadable images
+  - Fixed issue with program not exiting when all images are moved or unloadable
+  - Optimized image loading and transition process
+  - Improved responsiveness by reducing main loop delay
+  - Resolved issue with skipping additional image after moving
+  - Fixed AttributeError in process_image function
+  - Eliminated race conditions caused by threading in image processing
+  - Fixed issue with double-skipping images in move mode
+  - Implemented background processing for move/copy operations to improve responsiveness
+- Testing:
+  - Created test_main.py with initial unit tests for load_images and move_or_copy_image functions
+  - Fixed failing tests for move_or_copy_image function
+- Next steps:
+  - Complete implementation of unit tests for remaining functions
+  - Further optimize performance for large image collections
+  - Add additional features (zoom, rotate, slideshow)

@@ -1,0 +1,60 @@
+# Repository Instructions
+
+## Core Principles
+
+1. **Ensure all code in the repository is working and consistent with all tests above all else.** This is the primary job of this agent.
+2. Maintain highly testable and correctly running code.
+3. Ensure all changes are accompanied by test runs of the affected files.
+4. Revert changes if they don't work after a reasonable number of attempts.
+5. Keep GOALS.txt updated (marking in progress/complete, and breaking down subtasks) and follow its guidance.
+6. ONLY once a stable state has been achieved can we start to focus on next features.
+
+## Meta-Reasoning Instructions for LLM Systems
+
+When working on this repository, prioritize the following:
+
+1. Understand the current state of the project by analyzing existing code and documentation.
+2. Review and follow the goals outlined in GOALS.txt.
+3. Adhere to the current target phase of development in MODE.txt.
+4. Identify areas for improvement or optimization that align with project goals.
+5. Suggest and implement new features or architectures that advance project objectives.
+6. Ensure all code changes maintain or improve code quality, readability, and performance.
+7. Update documentation and comments to reflect any changes or additions.
+8. Consider the computational efficiency of implementations.
+
+## Testing and Implementation Process
+
+1. Before implementing any change, design appropriate tests.
+2. Implement the change along with its tests.
+3. Run the tests and verify the correct functioning of the changed files.
+4. If tests fail after a reasonable number of attempts (3-5):
+   a. Revert the changes.
+   b. Add a note to STATUS.txt explaining the attempted change and why it failed.
+   c. Propose and attempt a different approach.
+5. If tests pass, commit the changes and update relevant documentation.
+
+## Updating Goals
+
+1. Regularly review GOALS.txt to ensure it reflects the current project direction.
+2. Add sub-goals to GOALS.txt as the project evolves.
+3. Ensure all work contributes to achieving the goals listed in GOALS.txt.
+
+## Special Instruction for "y" Input
+
+When receiving a prompt input that is simply "y", the LLM reasoning system should:
+
+1. Analyze the current state of the repository.
+2. Review the goals in GOALS.txt and instructions in this file.
+3. Identify the most pressing or beneficial next step for the project.
+4. Propose and implement that step, following the testing and implementation process.
+5. Provide a clear explanation of the chosen action and its expected benefits.
+
+Remember to always consider the broader context of the project and how each change contributes to the overall goals outlined in GOALS.txt.
+
+## Statistics
+
+When working on algorithm improvement, try to record your progress over various techniques
+
+1.  Document your progress into .txt summaries in a /reports folder along with any available statistics of their success/failure
+2.  Occasionally analyze these and consider future directions.
+3.  Evaluate your plans and goals and make sure to archive the tasks into reports while updating future plans

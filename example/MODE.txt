@@ -1,0 +1,16 @@
+Current general development mode we should be operating in (update this according to overall strategy)
+
+CURRENT MODE: [CONSTRUCTION]
+
+
+Available modes:
+
+ANALYSIS - analyze, summarize, document, printout, and understand all aspects of the program - especially unknowns like runtime behavior and error states.
+
+CONSTRUCTION - adding features and performance in alignment with instructions and goals.
+
+DECONSTRUCTION 
+	- splitting, modularizing, and minimizing the codebase, to separate concerns into smaller self-contained submodule pieces which can be managed on their own.  
+	- This may involve creating functional programming functions, classes, or mini libraries in separate subfolders modules operating on their own
+	- Any submodule created should follow the same fractal pattern, with its own GOALS.txt and STATUS.txt according to the subproblem it is trying to solve. It should have a copy of INSTRUCTIONS.txt, and MODE.txt.
+

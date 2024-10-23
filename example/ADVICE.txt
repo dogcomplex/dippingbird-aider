@@ -1,0 +1,16 @@
+moving an image makes the viewer immediately jump to the next image (correctly), but then it skips AGAIN to the next image after that after a short delay (presumably after the first image has fully moved).  Think this might be an image indexing problem
+[status: resolved]
+
+The image move transition is too slow - the viewer needs to skip to the next image immediately, while the move completes in the back.  this should be done without affecting the overall indexing order
+[status: resolved.  Seems to be closely inversely tied with previous double-jump-on-move issue, and image indexes]
+
+Too many "Error loading image" events.  not sure if they're from all images being moved in the folder or not, but this shouldnt happen.  make sure looping back to first image works
+[status:  resolved?]
+
+"Error processing image" when number is pressed
+[status: resolved]
+
+
+OVERALL:
+big issue is that moving an image is TOO SLOW - we need to immedadiately jump to the next image.  make the move happen in the background, and flag the image as moved or something, instead of relying on the index so heavily.
+[status: all resolved!!!]
