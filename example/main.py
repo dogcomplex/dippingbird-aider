@@ -21,15 +21,26 @@ Usage:
 If no folder_path is provided, the current working directory is used.
 """
 
+from multiprocessing import Pool, cpu_count
+
+def validate_image(path):
+    """Validate if a file is a readable image."""
+    try:
+        with Image.open(path) as img:
+            img.verify()
+        return path
+    except:
+        return None
+
 def load_images(folder):
     """
-    Load all supported image files from the specified folder.
+    Load all supported image files from the specified folder using parallel processing.
 
     Args:
         folder (str): Path to the folder containing images.
 
     Returns:
-        list: A list of full paths to supported image files.
+        list: A list of full paths to valid image files.
     """
     if not os.path.exists(folder):
         print(f"Error: Folder '{folder}' does not exist!")
@@ -39,7 +50,6 @@ def load_images(folder):
         print(f"Error: '{folder}' is not a directory!")
         return []
 
-    images = []
     supported_formats = ('.png', '.jpg', '.jpeg', '.gif', '.bmp')
     
     try:
@@ -48,13 +58,26 @@ def load_images(folder):
             print(f"The folder '{folder}' is empty!")
             return []
             
-        for filename in files:
-            if filename.lower().endswith(supported_formats):
-                images.append(os.path.join(folder, filename))
-                
-        if not images:
+        # Get potential image paths
+        image_paths = [
+            os.path.join(folder, f) for f in files 
+            if f.lower().endswith(supported_formats)
+        ]
+        
+        if not image_paths:
             print(f"No supported images found in '{folder}'")
             print(f"Supported formats: {', '.join(supported_formats)}")
+            return []
+            
+        # Validate images in parallel
+        with Pool(processes=cpu_count()) as pool:
+            valid_images = pool.map(validate_image, image_paths)
+            
+        # Filter out None results (invalid images)
+        images = [img for img in valid_images if img is not None]
+        
+        if not images:
+            print("No valid images found in folder")
             
         return images
         
